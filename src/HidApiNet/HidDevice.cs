@@ -4,32 +4,33 @@ using System.Runtime.InteropServices;
 
 namespace HidApiNet
 {
-	class HidDevice : IDisposable
+	public class HidDevice : IDisposable
 	{
 		public HidDeviceInfo info;
 		private IntPtr hid = IntPtr.Zero;
 
 		public HidDevice(string path)
 		{
-			var res = Interop.hid_init();
+			var res = NativeMethods.hid_init();
 			if (res != 0)
 				return;
-			this.hid = Interop.hid_open_path(path);
+
+		    this.hid = NativeMethods.hid_open_path(path);
 		}
 
 		public HidDevice(ushort vid, ushort pid)
 		{
-			var res = Interop.hid_init();
+			var res = NativeMethods.hid_init();
 			if (res != 0)
 				return;
 			//this.hid = HIDApi.hid_open(vid, pid, null);
 			
-			var ptr = Interop.hid_enumerate(vid, pid);
+			var ptr = NativeMethods.hid_enumerate(vid, pid);
 			if (ptr == IntPtr.Zero)
 				return;
 
-			this.info = (HidDeviceInfo)Marshal.PtrToStructure(ptr, typeof(HidDeviceInfo));
-			this.hid = Interop.hid_open_path(info.path);
+			info = (HidDeviceInfo)Marshal.PtrToStructure(ptr, typeof(HidDeviceInfo));
+			hid = NativeMethods.hid_open_path(info.path);
 		}
 
 		public bool IsOpen
@@ -56,16 +57,16 @@ namespace HidApiNet
 			switch (name)
 			{
 				case PropName.ProductString:
-					res = Interop.hid_get_product_string(this.hid, s, s.Length);
+					res = NativeMethods.hid_get_product_string(this.hid, s, s.Length);
 					break;
 				case PropName.ManufacturerString:
-					res = Interop.hid_get_manufacturer_string(this.hid, s, s.Length);
+					res = NativeMethods.hid_get_manufacturer_string(this.hid, s, s.Length);
 					break;
 				case PropName.SerialNumberString:
-					res = Interop.hid_get_serial_number_string(this.hid, s, s.Length);
+					res = NativeMethods.hid_get_serial_number_string(this.hid, s, s.Length);
 					break;
 				case PropName.IndexedString:
-					res = Interop.hid_get_indexed_string(this.hid, index, s, s.Length);
+					res = NativeMethods.hid_get_indexed_string(this.hid, index, s, s.Length);
 					break;
 				default:
 					return null;
@@ -107,30 +108,30 @@ namespace HidApiNet
 
 		public int SetNonBlocking()
 		{
-			return Interop.hid_set_nonblocking(this.hid, 1);
+			return NativeMethods.hid_set_nonblocking(this.hid, 1);
 		}
 
 		public int Write(byte[] buffer)
 		{
-			return Interop.hid_write(this.hid, buffer, buffer.Length);
+			return NativeMethods.hid_write(this.hid, buffer, buffer.Length);
 		}
 
 		public int Read(byte[] buffer, int len)
 		{
-			return Interop.hid_read(this.hid, buffer, len);
+			return NativeMethods.hid_read(this.hid, buffer, len);
 		}
 
 		public int ReadTimeOut(byte[] buffer, int t)
 		{
-			return Interop.hid_read_timeout(this.hid, buffer, buffer.Length, t);
+			return NativeMethods.hid_read_timeout(this.hid, buffer, buffer.Length, t);
 		}
 
 
 		public void Dispose()
 		{
 			if (this.hid != IntPtr.Zero)
-				Interop.hid_close(hid);
-			Interop.hid_exit();
+				NativeMethods.hid_close(hid);
+			NativeMethods.hid_exit();
 		}
 	}
 }

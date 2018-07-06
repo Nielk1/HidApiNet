@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-//Wraps: libhidapi-libusb
-
 namespace HidApiNet
 {
-	class Interop
+	internal class NativeMethods
 	{
 		[DllImport("libhidapi-libusb.so")]
 		public static extern int hid_init();

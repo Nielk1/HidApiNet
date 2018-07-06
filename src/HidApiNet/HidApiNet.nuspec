@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>HidApiNet</id>
+    <version>$version$</version>
+    <authors>czesiu</authors>
+    <description>signal11/hidapi wrapper for .NET (works with mono on Raspberry) to talk to usb hid devices</description>
+    <language>en-US</language>
+    <projectUrl>https://github.com/czesiu/HidApiNet</projectUrl>
+    <tags>hid hidapi</tags>
+  </metadata>
+</package>

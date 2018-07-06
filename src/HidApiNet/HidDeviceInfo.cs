@@ -5,7 +5,7 @@ using System.Text;
 namespace HidApiNet
 {
 	[StructLayout(LayoutKind.Sequential, Pack = 4, CharSet = CharSet.Unicode)]
-	unsafe struct HidDeviceInfo
+	public unsafe struct HidDeviceInfo
 	{
 		[MarshalAs(UnmanagedType.LPStr)]
 		public readonly string path;
