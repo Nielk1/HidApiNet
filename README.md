@@ -3,7 +3,7 @@ HidApiNet
 
 [hidapi](https://github.com/signal11/hidapi) wrapper for .NET (works with mono on Raspberry) to talk to usb hid devices
 
-HID documentation can be found [here](https://docs.mbed.com/docs/ble-hid/en/latest/api/md_doc_HID.html) (keyboard/mouse codes) or [here](https://raw.githubusercontent.com/czesiu/HidApiNet/master/docs/Hut1_12v2.pdf) (more detailed documentation - keyboard codes at page 53).
+HID documentation can be found [here](https://docs.mbed.com/docs/ble-hid/en/latest/api/md_doc_HID.html) (keyboard/mouse codes) or [here](https://github.com/czesiu/HidApiNet/blob/master/docs/Hut1_12v2.pdf) (more detailed documentation - keyboard codes at page 53).
 
 ### Installation
 
