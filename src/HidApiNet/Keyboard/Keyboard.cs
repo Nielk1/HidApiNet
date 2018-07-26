@@ -19,7 +19,7 @@ namespace HidApiNet.Keyboard
             {
                 var bytesRead = Read(readBuffer, 8);
                 
-                Console.WriteLine($"{bytesRead} bytes read");
+                Console.WriteLine($"{bytesRead} bytes read: {BitConverter.ToString(readBuffer)}");
 
                 for (int i = 2; i < bytesRead; i++)
                 {
